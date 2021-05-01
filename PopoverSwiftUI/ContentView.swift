@@ -8,9 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var showPopover: Bool = false
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        ZStack {
+            Rectangle()
+            Button(action: {
+                showPopover.toggle()
+            }, label: {
+                Text("Show Popover")
+            }).popover(isPresented: $showPopover, content: {
+                Text("Popover is presented!")
+                    .font(.largeTitle)
+                    .frame(width: 200, height: 300)
+            })
+        }.edgesIgnoringSafeArea(.all)
     }
 }
 
